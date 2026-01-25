@@ -240,7 +240,7 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
      */
     const setApplicationState = function setApplicationState(state) {
         $scope.applicationState = state;
-        $scope.page.title = 'APP.NAME';
+        $scope.page.title = 'Remote Access';
         $scope.page.bodyClassName = '';
     };
 
