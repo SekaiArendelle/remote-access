@@ -19,11 +19,11 @@ jobs:
 
       - name: Dump image
         run: |
-          docker save remote-access:${{ github.ref_name }} | gzip > remote-access-${{ github.ref_name }}.tar.gz
+          docker save remote-access:${{ github.ref_name }} | gzip > remote-access.tar.gz
 
       - name: Upload artifact
         uses: softprops/action-gh-release@v2
         with:
-          files: remote-access-${{ github.ref_name }}.tar.gz
+          files: remote-access.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
