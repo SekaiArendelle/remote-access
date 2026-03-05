@@ -58,7 +58,7 @@ cd "$BUILD_DIR"
 # Run the maven build, applying any arbitrary provided maven arguments.
 #
 
-mvn $MAVEN_ARGUMENTS package
+mvn $MAVEN_ARGUMENTS package -Drat.skip=true
 
 #
 # Copy guacamole.war to destination
