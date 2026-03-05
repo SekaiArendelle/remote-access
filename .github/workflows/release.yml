@@ -1,0 +1,29 @@
+name: release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-docker-image:
+    name: Build docker image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build docker image
+        run: |
+          docker build -t remote-access:${{ github.ref_name }} .
+
+      - name: Dump image
+        run: |
+          docker save remote-access:${{ github.ref_name }} | gzip > remote-access-${{ github.ref_name }}.tar.gz
+
+      - name: Upload artifact
+        uses: softprops/action-gh-release@v2
+        with:
+          files: remote-access-${{ github.ref_name }}.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
